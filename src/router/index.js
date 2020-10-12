@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import jsonData from '@/assets/routeDirec.json'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,18 @@ function requireAuth(to, from, next) {
   }
 }
 
+// const routesFn = obj => {
+//   let arr = []
+//   Object.values(obj).forEach((value, index, array) => {
+//     // console.log(value, index, array)
+//     // let obj = { path: value.url, name: value.name, beforeEnter: requireAuth, component: () => import(/*  */) }
+//     if (value.children) {
+//       routesFn(value.children)
+//     }
+//   })
+// }
+// routesFn(jsonData)
+
 const routes = [
   { path: '/', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue') },
   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
@@ -29,7 +42,7 @@ const routes = [
   // { path: '/test', name: 'Test', component: () => import(/* webpackChunkName: "test" */ '@/views/Test.vue') },
   { path: '/0', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue') },
   { path: '/1', name: '网元配置', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'), children: [
-    { path: '0', name: '设备列表', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+    { path: '0', name: '设备列表', component: () => import(/* webpackChunkName: "equipmentlist" */ '@/views/networkConfigure/equipmentList/Index.vue') },
     { path: '1', name: '站点维护', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
     { path: '2', name: 'VIP站点管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
     { path: '3', name: '站点资产管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },

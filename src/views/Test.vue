@@ -1,7 +1,5 @@
 <template>
   <div>
-    Test
-    <p>123</p>
-    <p>tet</p>
+    this is a test page.
   </div>
 </template>

@@ -15,6 +15,7 @@
 // import auth from '@/router/auth'
 export default {
   created() {
+    // 带pathname刷新页面时
     let url = window.location.pathname;
     this.$store.dispatch({ type: 'handleSelect', index: url, indexPath: ['/'+url.slice(1).split('/')[0], url] })
   }

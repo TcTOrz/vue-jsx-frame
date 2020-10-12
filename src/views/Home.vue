@@ -2,7 +2,9 @@
   <div class="Home">
     <header-component></header-component>
     <tabs-component></tabs-component>
-    <router-view></router-view>
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 

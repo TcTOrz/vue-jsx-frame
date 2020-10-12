@@ -1,90 +1,110 @@
 {
   "0": {
     "name": "首页",
-    "url": "/0"
+    "url": "/0",
+    "chunkName": "index"
   },
   "1": {
     "name": "网元配置",
     "url": "/1",
+    "chunkName": "networkelementconfiguration",
     "children": {
       "0": {
         "name": "设备列表",
-        "url": "/1/0"
+        "url": "/1/0",
+        "chunkName": "equipmentlist"
       },
       "1": {
         "name": "站点维护",
-        "url": "/1/1"
+        "url": "/1/1",
+        "chunkName": "sitemaintenance"
       },
       "2": {
         "name": "VIP站点管理",
-        "url": "/1/2"
+        "url": "/1/2",
+        "chunkName": "vipsitemanagement"
       },
       "3": {
         "name": "站点资产管理",
-        "url": "/1/3"
+        "url": "/1/3",
+        "chunkName": "siteassetmanagement"
       },
       "4": {
         "name": "电子地图",
-        "url": "/1/4"
+        "url": "/1/4",
+        "chunkName": "electronicmap"
       }
     }
   },
   "2": {
     "name": "操作维护",
     "url": "/2",
+    "chunkName": "operationandmaintenance",
     "children": {
       "0": {
         "name": "设备监控",
-        "url": "/2/0"
+        "url": "/2/0",
+        "chunkName": "equipmentmonitoring"
       },
       "1": {
         "name": "轮询处理",
-        "url": "/2/1"
+        "url": "/2/1",
+        "chunkName": "polling"
       },
       "2": {
         "name": "轮询报告",
-        "url": "/2/2"
+        "url": "/2/2",
+        "chunkName": "pollingreport"
       },
       "3": {
         "name": "上报信息查询",
-        "url": "/2/3"
+        "url": "/2/3",
+        "chunkName": "reportedinformationqueries"
       },
       "4": {
         "name": "人为开关告警查询",
-        "url": "/2/4"
+        "url": "/2/4",
+        "chunkName": "humanswitchalarmsquery"
       }
     }
   },
   "3": {
     "name": "查询统计",
     "url": "/3",
+    "chunkName": "searchstatistics",
     "children": {
       "0": {
         "name": "设备完好率",
-        "url": "/3/0"
+        "url": "/3/0",
+        "chunkName": "equipmentintactnessrate"
       },
       "1": {
         "name": "实时告警列表",
-        "url": "/3/1"
+        "url": "/3/1",
+        "chunkName": "realtimealarmlist"
       },
       "2": {
         "name": "延时告警列表",
-        "url": "/3/2"
+        "url": "/3/2",
+        "chunkName": "delayedalertlist"
       }
     }
   },
   "4": {
     "name": "系统设置",
     "url": "/4",
+    "chunkName": "systemsetup",
     "children": {
       "0": {
         "name": "示例菜单",
-        "url": "/4/0"
+        "url": "/4/0",
+        "chunkName": "examplemenu"
       }
     }
   },
   "5": {
     "name": "帮助",
-    "url": "/5"
+    "url": "/5",
+    "chunkName": "help  "
   }
 }

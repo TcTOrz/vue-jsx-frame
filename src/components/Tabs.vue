@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <el-tabs v-model="tabsValue" closable @tab-remove="removeTab" @tab-click="clickTab">
-      <el-tab-pane
-        v-for="(item) in tabs"
-        :key="item.name"
-        :label="item.title"
-        :name="item.name"
-      >{{ item.content }}</el-tab-pane>
-    </el-tabs>
-  </div>
+  <el-tabs v-model="tabsValue" closable @tab-remove="removeTab" @tab-click="clickTab">
+    <el-tab-pane
+      v-for="(item) in tabs"
+      :key="item.name"
+      :label="item.title"
+      :name="item.name"
+    >{{ item.content }}</el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
@@ -46,3 +44,9 @@ export default {
   },
 }
 </script>
+
+<style>
+  .el-tabs__header {
+    margin: 0;
+  }
+</style>
