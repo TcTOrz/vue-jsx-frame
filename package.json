@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.4.5",
     "js-cookie": "^2.2.1",
+    "lodash": "^4.17.20",
     "vue": "^2.6.11",
     "vue-router": "^3.4.5",
     "vuex": "^3.5.1"
@@ -41,7 +42,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "globals": {
+      "_": true
+    }
   },
   "browserslist": [
     "> 1%",

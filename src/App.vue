@@ -14,9 +14,10 @@
 <script>
 // import auth from '@/router/auth'
 export default {
-  // computed: {
-  //   loggedIn: () => auth.loggedIn()
-  // },
+  created() {
+    let url = window.location.pathname;
+    this.$store.dispatch({ type: 'handleSelect', index: url, indexPath: ['/'+url.slice(1).split('/')[0], url] })
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
-import { STORAGE_KEY } from './mutations'
+// import { STORAGE_KEY } from './mutations'
 
-console.log('plugins', STORAGE_KEY)
+// console.log('plugins', STORAGE_KEY)
 
 export default {
 
