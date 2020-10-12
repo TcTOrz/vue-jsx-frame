@@ -2,17 +2,17 @@
   "0": {
     "name": "首页",
     "url": "/0",
-    "chunkName": "index"
+    "chunkName": "home"
   },
   "1": {
     "name": "网元配置",
     "url": "/1",
-    "chunkName": "networkelementconfiguration",
+    "chunkName": "networkConfigure",
     "children": {
       "0": {
         "name": "设备列表",
         "url": "/1/0",
-        "chunkName": "equipmentlist"
+        "chunkName": "equipmentList"
       },
       "1": {
         "name": "站点维护",
@@ -105,6 +105,6 @@
   "5": {
     "name": "帮助",
     "url": "/5",
-    "chunkName": "help  "
+    "chunkName": "help"
   }
 }

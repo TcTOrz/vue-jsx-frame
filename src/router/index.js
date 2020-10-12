@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import jsonData from '@/assets/routeDirec.json'
+import jsonData from '@/assets/routeDirec.json'
 
 Vue.use(VueRouter)
 
@@ -23,56 +23,87 @@ function requireAuth(to, from, next) {
   }
 }
 
-// const routesFn = obj => {
-//   let arr = []
-//   Object.values(obj).forEach((value, index, array) => {
-//     // console.log(value, index, array)
-//     // let obj = { path: value.url, name: value.name, beforeEnter: requireAuth, component: () => import(/*  */) }
-//     if (value.children) {
-//       routesFn(value.children)
-//     }
-//   })
-// }
-// routesFn(jsonData)
+const routesFn = (obj, c) => {
+  let arr = []
+  Object.values(obj).forEach((value) => {
+    let {name, url, chunkName} = value,
+      path = c === '' ? `${chunkName}/Index` : `${c}/${chunkName}/Index`
+    url = c === '' ? url : url.slice(1).split('/')[1]
+    if (value['children']) {
+      let a = { path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`), children: [] }
+      // Object.values(value['children']).forEach(val => {
+      //   let {name: n, url: u , chunkName: c} = val,
+      //     p = `${chunkName}/${c}/Index`
+      //   a.children.push({ path: u.slice(1).split('/')[1], name: n, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${p}.vue`) })
+      // })
+      a.children = routesFn(value['children'], chunkName)
+      arr.push(a)
+    } else {
+      arr.push({ path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`) })
+    }
+  })
+  console.log(arr)
+  return arr
+}
 
 const routes = [
-  { path: '/', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue') },
+  { path: '/', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
-  // { path: '/about', name: 'About', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue') },
-  // { path: '/test', name: 'Test', component: () => import(/* webpackChunkName: "test" */ '@/views/Test.vue') },
-  { path: '/0', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue') },
-  { path: '/1', name: '网元配置', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'), children: [
-    { path: '0', name: '设备列表', component: () => import(/* webpackChunkName: "equipmentlist" */ '@/views/networkConfigure/equipmentList/Index.vue') },
-    { path: '1', name: '站点维护', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '2', name: 'VIP站点管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '3', name: '站点资产管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '4', name: '电子地图', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
-  ] },
-  { path: '/2', name: '操作维护', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'), children: [
-    { path: '0', name: '设备监控', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '1', name: '轮询处理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '2', name: '轮询报告', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '3', name: '上报信息查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '4', name: '人为开关告警查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
-  ] },
-  { path: '/3', name: '操作维护', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'), children: [
-    { path: '0', name: '设备监控', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '1', name: '轮询处理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '2', name: '轮询报告', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '3', name: '上报信息查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
-    { path: '4', name: '人为开关告警查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
-  ] },
   { path: '/logout', beforeEnter: (to, from, next) => {
     auth.logout()
     next('/login')
   }},
-  { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
-  // { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
+  { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') },
+  ...routesFn(jsonData, '')
 ]
+
+// -----------------------------------------------
+
+// var //chunkName = 'home',
+//   name = 'networkConfigure/equipmentList/Index',
+//   home = '设备列表',
+//   path = '0'
+
+// const routes = [
+//   { path: '/', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+//   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
+//   // { path: '/about', name: 'About', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue') },
+//   // { path: '/test', name: 'Test', component: () => import(/* webpackChunkName: "test" */ '@/views/Test.vue') },
+//   { path: '/0', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+//   { path: '/1', name: '网元配置', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "t" */ '@/views/networkConfigure/Index.vue'), children: [
+//     // { path: '0', name: '设备列表', component: () => import(/* webpackChunkName: "equipmentlist" */ '@/views/networkConfigure/equipmentList/Index.vue') },
+//     { path: path, name: home, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${name}.vue`) },
+//     { path: '1', name: '站点维护', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '2', name: 'VIP站点管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '3', name: '站点资产管理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '4', name: '电子地图', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
+//   ] },
+//   { path: '/2', name: '操作维护', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [
+//     { path: '0', name: '设备监控', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '1', name: '轮询处理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '2', name: '轮询报告', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '3', name: '上报信息查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '4', name: '人为开关告警查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
+//   ] },
+//   { path: '/3', name: '操作维护', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [
+//     { path: '0', name: '设备监控', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '1', name: '轮询处理', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '2', name: '轮询报告', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '3', name: '上报信息查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//     { path: '4', name: '人为开关告警查询', component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') }
+//   ] },
+//   { path: '/5', name: '帮助', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/Test.vue') },
+//   { path: '/logout', beforeEnter: (to, from, next) => {
+//     auth.logout()
+//     next('/login')
+//   }},
+//   { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
+//   // { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
+// ]
 
 const router = new VueRouter({
   mode: 'history',
-  // base: __dirname,
+  base: __dirname,
   routes
 })
 

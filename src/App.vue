@@ -5,6 +5,11 @@
     <!-- <div
       v-if="loggedIn"
     >loggedIn</div> -->
+    <header-component></header-component>
+    <tabs-component></tabs-component>
+<!--     <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition> -->
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
@@ -13,10 +18,17 @@
 
 <script>
 // import auth from '@/router/auth'
+import headerComponent from '@/components/Header'
+import tabsComponent from '@/components/Tabs'
 export default {
+  components: {
+    headerComponent,
+    tabsComponent
+  },
   created() {
     // 带pathname刷新页面时
     let url = window.location.pathname;
+    if (url === '/') return
     this.$store.dispatch({ type: 'handleSelect', index: url, indexPath: ['/'+url.slice(1).split('/')[0], url] })
   }
 }
