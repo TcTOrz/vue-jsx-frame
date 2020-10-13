@@ -42,6 +42,15 @@ export default {
     },
     clickTab(tag) {
       this.$router.push({ path: tag.name })
+
+      let index = tag.name,
+        indexPath = []
+      if (index.slice(1).split('/').length === 2) {
+        indexPath = ['/'+index.slice(1).split('/')[0], index]
+      } else {
+        indexPath = [index]
+      }
+      this.$store.dispatch({ type: 'handleSelect', index, indexPath})
     }
   },
 }
