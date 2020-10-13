@@ -42,7 +42,7 @@ const routesFn = (obj, c) => {
       arr.push({ path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`) })
     }
   })
-  console.log(arr)
+  // console.log(arr)
   return arr
 }
 

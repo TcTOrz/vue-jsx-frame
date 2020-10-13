@@ -15,7 +15,8 @@ import { mapGetters, /* mapActions */ } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'tabs'
+      'tabs',
+      'activeIndex'
     ]),
     tabsValue: {
       get: function() {
@@ -35,8 +36,9 @@ export default {
     }
   },
   methods: {
-    removeTab(targetName) {
-      this.$store.dispatch({ type: 'removeTab', targetName })
+    async removeTab(targetName) {
+      await this.$store.dispatch({ type: 'removeTab', targetName })
+      this.$router.push({ path: this.activeIndex })
     },
     clickTab(tag) {
       this.$router.push({ path: tag.name })

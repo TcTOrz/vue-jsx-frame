@@ -44,13 +44,14 @@ export const addTab = (state, tab, url) => {
 export const removeTab = (state, payload) => {
   let targetName = payload.targetName
   let tabs = state.tabs
-  let activeName = state.tabsValue;
+  let activeName = state.tabsValue
   if (activeName === targetName) {
     tabs.forEach((tab, index) => {
       if (tab.name === targetName) {
         let nextTab = tabs[index + 1] || tabs[index - 1];
         if (nextTab) {
-          activeName = nextTab.name;
+          activeName = nextTab.name
+          state.activeIndex = state.tabsValue = activeName
         }
       }
     });
