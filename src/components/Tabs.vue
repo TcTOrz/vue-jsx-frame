@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="tabsValue" closable @tab-remove="removeTab" @tab-click="clickTab">
+  <el-tabs v-model="tabsValue" :closable="isclose" @tab-remove="removeTab" @tab-click="clickTab">
     <el-tab-pane
       v-for="(item) in tabs"
       :key="item.name"
@@ -29,16 +29,24 @@ export default {
         if (!obj) return 
         this.$store.state.tabsValue = obj.name
       }
+    },
+    isclose() {
+      if (this.tabs.length === 1) {
+        return false
+      }
+      return true
     }
   },
   data() {
     return {
+      closable: false
     }
   },
   methods: {
     async removeTab(targetName) {
       await this.$store.dispatch({ type: 'removeTab', targetName })
       this.$router.push({ path: this.activeIndex })
+      
     },
     clickTab(tag) {
       this.$router.push({ path: tag.name })

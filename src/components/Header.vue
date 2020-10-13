@@ -6,7 +6,7 @@
     <el-col :span="20">
       <!-- <navbar-component></navbar-component> -->
       <menu-component></menu-component>
-      <el-menu 
+      <!-- <el-menu 
         mode="horizontal" 
         @select="handleSelect"
         background-color="#69c"
@@ -43,7 +43,7 @@
           <el-menu-item index='/home/4/0'>示例菜单</el-menu-item>
         </el-submenu>
         <el-menu-item index="/home/5">帮助</el-menu-item>
-      </el-menu>
+      </el-menu> -->
     </el-col>
     <el-col :span="2" style="height: 60px; position: inherit;">
       <div class="lists">
@@ -55,20 +55,20 @@
 </template>
 
 <script>
-import { mapGetters, /* mapActions */ } from 'vuex'
+// import { mapGetters, /* mapActions */ } from 'vuex'
 import menuComponent from './Menu'
 export default {
   components: {
     menuComponent
   },
-  computed: mapGetters([
-    'activeIndex'
-  ]),
-  methods: {
-    handleSelect(index, indexPath) {
-      this.$store.dispatch({ type: 'handleSelect', index, indexPath})
-    }
-  }
+  // computed: mapGetters([
+  //   'activeIndex'
+  // ]),
+  // methods: {
+  //   handleSelect(index, indexPath) {
+  //     this.$store.dispatch({ type: 'handleSelect', index, indexPath})
+  //   }
+  // }
 }
 </script>
 
