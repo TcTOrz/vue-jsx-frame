@@ -2,11 +2,10 @@
   <div id="app">
     <!-- <router-link to="/about">about</router-link>
     <router-link to="/">/home</router-link> -->
-    <!-- <div
-      v-if="loggedIn"
-    >loggedIn</div> -->
-    <header-component></header-component>
-    <tabs-component></tabs-component>
+    <!-- <div v-if="loggedIn">
+    </div> -->
+    <!-- <header-component></header-component>
+    <tabs-component></tabs-component> -->
 <!--     <transition name="fade" mode="out-in">
       <router-view></router-view>
     </transition> -->
@@ -18,13 +17,21 @@
 
 <script>
 // import auth from '@/router/auth'
-import headerComponent from '@/components/Header'
-import tabsComponent from '@/components/Tabs'
+// import headerComponent from '@/components/Header'
+// import tabsComponent from '@/components/Tabs'
 export default {
-  components: {
-    headerComponent,
-    tabsComponent
-  },
+  // components: {
+  //   headerComponent,
+  //   tabsComponent
+  // },
+  // data() {
+    // return {
+    //   loggedIn: false
+    // }
+  // },
+  // mounted() {
+  //   this.loggedIn = auth.loggedIn()
+  // },
   created() {
     // 带pathname刷新页面时
     let url = window.location.pathname;

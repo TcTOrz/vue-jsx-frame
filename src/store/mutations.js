@@ -3,22 +3,22 @@ export const STORAGE_KEY = state => state.STORAGE_KEY
 
 export const handleSelect = (state, payload) => {
   let path = payload.indexPath
-  let name = path[path.length - 1]
+  let name = path[path.length - 1].slice(6)
   let targetName = getTabName(name)
   let tabs = state.tabs
   let isExist = _.findIndex(tabs, function(o) {
-    return o.name === name
+    return o.name === '/home/'+name
   })
   if (isExist === -1) {
     // add tabs
-    addTab(state, targetName, name)
+    addTab(state, targetName, '/home/'+name)
   }
-  state.activeIndex = state.tabsValue = name
-  // console.log(name, targetName, tabs)
+  state.activeIndex = state.tabsValue = '/home/'+name
 }
 
 const getTabName = (name) => {
-  let arr = name.slice(1).split('/')
+  // let arr = name.slice(1).split('/')
+  let arr = name.split('/')
   if (arr.length > 1) {
     return jsonData[arr[0]].children[arr[1]].name
   } else {

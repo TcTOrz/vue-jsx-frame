@@ -1,110 +1,111 @@
+
 {
   "0": {
     "name": "首页",
-    "url": "/0",
-    "chunkName": "home"
+    "url": "0",
+    "chunkName": "index"
   },
   "1": {
     "name": "网元配置",
-    "url": "/1",
+    "url": "1",
     "chunkName": "networkConfigure",
     "children": {
       "0": {
         "name": "设备列表",
-        "url": "/1/0",
+        "url": "1/0",
         "chunkName": "equipmentList"
       },
       "1": {
         "name": "站点维护",
-        "url": "/1/1",
-        "chunkName": "sitemaintenance"
+        "url": "1/1",
+        "chunkName": "siteMaintenance"
       },
       "2": {
         "name": "VIP站点管理",
-        "url": "/1/2",
-        "chunkName": "vipsitemanagement"
+        "url": "1/2",
+        "chunkName": "vipSitemanagement"
       },
       "3": {
         "name": "站点资产管理",
-        "url": "/1/3",
-        "chunkName": "siteassetmanagement"
+        "url": "1/3",
+        "chunkName": "siteAssetManagement"
       },
       "4": {
         "name": "电子地图",
-        "url": "/1/4",
-        "chunkName": "electronicmap"
+        "url": "1/4",
+        "chunkName": "electronicMap"
       }
     }
   },
   "2": {
     "name": "操作维护",
-    "url": "/2",
-    "chunkName": "operationandmaintenance",
+    "url": "2",
+    "chunkName": "operationAndMaintenance",
     "children": {
       "0": {
         "name": "设备监控",
-        "url": "/2/0",
-        "chunkName": "equipmentmonitoring"
+        "url": "2/0",
+        "chunkName": "equipmentMonitoring"
       },
       "1": {
         "name": "轮询处理",
-        "url": "/2/1",
+        "url": "2/1",
         "chunkName": "polling"
       },
       "2": {
         "name": "轮询报告",
-        "url": "/2/2",
-        "chunkName": "pollingreport"
+        "url": "2/2",
+        "chunkName": "pollingReport"
       },
       "3": {
         "name": "上报信息查询",
-        "url": "/2/3",
-        "chunkName": "reportedinformationqueries"
+        "url": "2/3",
+        "chunkName": "reportedInformationQueries"
       },
       "4": {
         "name": "人为开关告警查询",
-        "url": "/2/4",
-        "chunkName": "humanswitchalarmsquery"
+        "url": "2/4",
+        "chunkName": "humanSwitchAlarmsQuery"
       }
     }
   },
   "3": {
     "name": "查询统计",
-    "url": "/3",
-    "chunkName": "searchstatistics",
+    "url": "3",
+    "chunkName": "searchStatistics",
     "children": {
       "0": {
         "name": "设备完好率",
-        "url": "/3/0",
-        "chunkName": "equipmentintactnessrate"
+        "url": "3/0",
+        "chunkName": "equipmentIntactnessRate"
       },
       "1": {
         "name": "实时告警列表",
-        "url": "/3/1",
-        "chunkName": "realtimealarmlist"
+        "url": "3/1",
+        "chunkName": "realTimeAlarmList"
       },
       "2": {
         "name": "延时告警列表",
-        "url": "/3/2",
-        "chunkName": "delayedalertlist"
+        "url": "3/2",
+        "chunkName": "delayedAlarmList"
       }
     }
   },
   "4": {
     "name": "系统设置",
-    "url": "/4",
-    "chunkName": "systemsetup",
+    "url": "4",
+    "chunkName": "systemSetup",
     "children": {
       "0": {
         "name": "示例菜单",
-        "url": "/4/0",
-        "chunkName": "examplemenu"
+        "url": "4/0",
+        "chunkName": "exampleMenu"
       }
     }
   },
   "5": {
     "name": "帮助",
-    "url": "/5",
+    "url": "5",
     "chunkName": "help"
   }
 }

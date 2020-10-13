@@ -47,14 +47,14 @@ const routesFn = (obj, c) => {
 }
 
 const routes = [
-  { path: '/', name: 'Home', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+  { path: '/', name: 'Home', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
   { path: '/logout', beforeEnter: (to, from, next) => {
     auth.logout()
     next('/login')
   }},
   { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') },
-  ...routesFn(jsonData, '')
+  { path: '/home', name: 'Home', component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [...routesFn(jsonData, '')] }
 ]
 
 // -----------------------------------------------

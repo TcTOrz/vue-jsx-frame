@@ -10,12 +10,12 @@ Vue.use(Vuex)
 const state = {
   STORAGE_KEY: 'rsnmd-vuejs',
   // navbar
-  activeIndex: '/0',
+  activeIndex: '/home/0',
   // tabs
-  tabsValue: '/0',
+  tabsValue: '/home/0',
   tabs: [{
     title: '首页',
-    name: '/0',
+    name: '/home/0',
     content: ''
   }]
 }
