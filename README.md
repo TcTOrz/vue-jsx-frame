@@ -1,4 +1,4 @@
-# rsnmd
+# vue-jsx-frame
 
 ## Project setup
 ```
