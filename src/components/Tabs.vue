@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="tabsValue" :closable="isclose" @tab-remove="removeTab" @tab-click="clickTab">
+  <el-tabs v-model="tabsValue" :closable="isclose" @tab-remove="removeTab" @tab-click="clickTab" type="card">
     <el-tab-pane
       v-for="(item) in tabs"
       :key="item.name"
@@ -10,8 +10,8 @@
 </template>
 
 <script>
-// import jsonData from '@/assets/routeDirec.json'
 import { mapGetters, /* mapActions */ } from 'vuex'
+import Sortable from 'sortablejs'
 export default {
   computed: {
     ...mapGetters([
@@ -42,7 +42,20 @@ export default {
       closable: false
     }
   },
+  mounted() {
+    this.rowDrop()
+  },
   methods: {
+    rowDrop() {
+      const el = document.querySelector('.el-tabs__nav')
+      const _this = this
+      Sortable.create(el, {
+        onEnd({ newIndex, oldIndex }) {                         //oldIIndex拖放前的位置， newIndex拖放后的位置
+          const currRow = _this.tabs.splice(oldIndex, 1)[0]     //鼠标拖拽当前的el-tabs-pane
+          _this.tabs.splice(newIndex, 0, currRow)               //tableData 是存放所有el-tabs-pane的数组
+        }
+      })
+    },
     async removeTab(targetName) {
       await this.$store.dispatch({ type: 'removeTab', targetName })
       this.$router.push({ path: this.activeIndex })
