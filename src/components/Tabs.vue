@@ -49,10 +49,12 @@ export default {
     rowDrop() {
       const el = document.querySelector('.el-tabs__nav')
       const _this = this
-      Sortable.create(el, {
-        onEnd({ newIndex, oldIndex }) {                         //oldIIndex拖放前的位置， newIndex拖放后的位置
-          const currRow = _this.tabs.splice(oldIndex, 1)[0]     //鼠标拖拽当前的el-tabs-pane
-          _this.tabs.splice(newIndex, 0, currRow)               //tableData 是存放所有el-tabs-pane的数组
+      new Sortable(el, {
+        animation: 150,
+        swapThreshold: 1,                                       // Swap Threshold 触发边界
+        onEnd({ newIndex, oldIndex }) {                         // oldIIndex拖放前的位置， newIndex拖放后的位置
+          const currRow = _this.tabs.splice(oldIndex, 1)[0]     // 鼠标拖拽当前的el-tabs-pane
+          _this.tabs.splice(newIndex, 0, currRow)               // tabs 是存放所有el-tabs-pane的数组
         }
       })
     },
