@@ -31,30 +31,38 @@ const routesFn = (obj, c) => {
     url = c === '' ? url : url.slice(1).split('/')[1]
     if (value['children']) {
       let a = { path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`), children: [] }
-      // Object.values(value['children']).forEach(val => {
-      //   let {name: n, url: u , chunkName: c} = val,
-      //     p = `${chunkName}/${c}/Index`
-      //   a.children.push({ path: u.slice(1).split('/')[1], name: n, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${p}.vue`) })
-      // })
       a.children = routesFn(value['children'], chunkName)
       arr.push(a)
     } else {
       arr.push({ path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`) })
     }
   })
-  // console.log(arr)
+  return arr
+}
+
+const redirectFn = obj => {
+  let arr = []
+  Object.values(obj).forEach(value => {
+    let {name, url, chunkName} = value,
+      path = `${chunkName}/0/Index`
+    if (value['children']) {
+      arr.push({ path: `/home/${url}`, redirect: `/home/${url}/0`, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`) })
+    }
+  })
   return arr
 }
 
 const routes = [
   { path: '/', name: 'Home', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+  { path: '/home', name: 'Home', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+  ...redirectFn(jsonData),
   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
   { path: '/logout', beforeEnter: (to, from, next) => {
     auth.logout()
     next('/login')
   }},
-  { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') },
-  { path: '/home', name: 'Home', component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [...routesFn(jsonData, '')] }
+  { path: '/home', name: 'Home', component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [...routesFn(jsonData, '')] },
+  { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
 ]
 
 // -----------------------------------------------
