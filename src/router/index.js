@@ -30,7 +30,7 @@ const routesFn = (obj, c) => {
       path = c === '' ? `${chunkName}/Index` : `${c}/${chunkName}/Index`
     url = c === '' ? url : url.slice(1).split('/')[1]
     if (value['children']) {
-      let a = { path: url, name, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`), children: [] }
+      let a = { path: url, name: `${name}-${url}`, beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "[request]" */ `@/views/${path}.vue`), children: [] }
       a.children = routesFn(value['children'], chunkName)
       arr.push(a)
     } else {
@@ -54,14 +54,14 @@ const redirectFn = obj => {
 
 const routes = [
   { path: '/', name: 'Home', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
-  { path: '/home', name: 'Home', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
+  { path: '/home', name: 'HomeRedirect', redirect: '/home/0', beforeEnter: requireAuth, component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue') },
   ...redirectFn(jsonData),
   { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue') },
   { path: '/logout', beforeEnter: (to, from, next) => {
     auth.logout()
     next('/login')
   }},
-  { path: '/home', name: 'Home', component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [...routesFn(jsonData, '')] },
+  { path: '/home', name: 'HomePath', component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index.vue'), children: [...routesFn(jsonData, '')] },
   { path: '*', name: '404', component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue') }
 ]
 
