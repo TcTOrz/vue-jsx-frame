@@ -8,17 +8,8 @@ import './plugins/lodash.js'
 
 Vue.config.productionTip = false
 
-// import jsonData from '@//assets/routeDirec.json' 
-// console.log(jsonData)
-Vue.component('navbar-component', {
-  render() {
-    return (
-      <div>
-        <h1>hello</h1>world
-      </div>
-    )
-  },
-})
+import * as Mock from './mock/index.js'
+process.env.NODE_ENV === 'development' ?  Mock: ''
 
 new Vue({
   router,
